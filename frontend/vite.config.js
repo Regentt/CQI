@@ -8,6 +8,21 @@ const __dirname = path.dirname(__filename);
  
 export default defineConfig({
   plugins: [react()],
+  build: {
+    rolldownOptions: {
+      output: {
+        // Automatically splits node_modules dependencies into separate vendor chunks
+        codeSplitting: {
+          groups: [
+            {
+              name: 'vendor',
+              test: /node_modules/,
+            }
+          ]
+        }
+      }
+    }
+    },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
